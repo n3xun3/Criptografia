@@ -28,7 +28,13 @@ public class UserAuthentication {
      * @return Verdadero si las credenciales son válidas, falso en caso contrario.
      */
     public boolean autenticarUsuario(String usuario, String contrasena) {
-        return usuarios.containsKey(usuario) && usuarios.get(usuario).equals(hashPassword(contrasena));
+        try {
+            return usuarios.containsKey(usuario) && usuarios.get(usuario).equals(hashPassword(contrasena));
+        } catch (Exception e) {
+            System.err.println("Error al autenticar al usuario.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
